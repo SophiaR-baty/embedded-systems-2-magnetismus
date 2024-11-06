@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Spulendimensionierung</title>
+        
+        <!-- externals -->
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script>
+            MathJax = {
+                tex: {
+                    inlineMath: [['$', '$']],
+                    displayMath: [['$$', '$$']]
+                },
+                svg: {
+                    fontCache: 'global',
+                    scale: 0.8
+                }
+            };
+        </script>
+        <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.5.0/math.min.js"></script>
+        <script async src="https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+        
+        <script src="script.js" defer></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Dimensionierung</h1>
+        
+        <div class="card" id="container-formeln">
+            <h2>Formeln:</h2>
+            <!-- Flussdichte -->
+            <div>
+                <label class="tablelike-content">Magnetische Flussdichte $B$: </label>
+                <p class="tablelike-content">
+                    $$
+                    \begin{align}
+                    B(z) 
+                    &= \frac{\mu_0}{4\cdot\pi} \cdot \frac{2\cdot\pi\cdot N \cdot I \cdot R^2 \cdot \hat{z}}{(R^2+z^2)^\frac{3}{2}} \\
+                    \end{align}
+                    $$
+                </p>
+            </div>
+            <!-- Feldstärke -->
+            <div>
+                <label class="tablelike-content">Magnetische Feldstärke $H$: </label>
+                <p class="tablelike-content">
+                    $$
+                    \begin{align}
+                    H(z) 
+                    &= \frac{B(z)}{\mu_0}\\
+                    \end{align}
+                    $$
+                </p>
+            </div>
+            <!-- Potentielle Energie -->
+            <div>
+                <label class="tablelike-content">Potentielle Energie $U$: </label>
+                <p class="tablelike-content">
+                    $$
+                    \begin{align}
+                    U(z)=-m(z)\cdot B(z)
+                    \end{align}
+                    $$
+                </p>
+            </div>
+            <!-- Kraft -->
+            <div>
+                <label class="tablelike-content">Kraft $F$: </label>
+                <p class="tablelike-content">
+                    $$
+                    \begin{align}
+                    F(z)&=-\nabla U(z)=\nabla(m(z)\cdot B(z)) \\
+                    &= \frac{d}{dz}(m(z)\cdot B(z))
+                    \end{align}
+                    $$
+                </p>
+            </div>
+            <!-- Suszeptibilität -->
+            <div>
+                <label class="tablelike-content">Suszeptibilität $\chi$: </label>
+                <p class="tablelike-content">
+                    $$
+                    \begin{align}
+                    \chi &= \mu_r - 1
+                    \end{align}
+                    $$
+                </p>
+            </div>
+            <!-- Suszeptibilität -->
+            <div>
+                <label class="tablelike-content">Magnetisierung $M$: </label>
+                <p class="tablelike-content">
+                    $$
+                    \begin{align}
+                    M(z) &= \chi\cdot H(z) \\
+                    \end{align}
+                    $$
+                </p>
+            </div>
+            <!-- Volumen -->
+            <div>
+                <label class="tablelike-content">Volumen $V$ der Kugel: </label>
+                <p class="tablelike-content">
+                    $$
+                    \begin{align}
+                    V = \frac{4}{3} \cdot \pi \cdot r^3
+                    \end{align}
+                    $$
+                </p>
+            </div>
+            <!-- Dipolmoment -->
+            <div>
+                <label class="tablelike-content">Dipolmoment $m$: </label>
+                <p class="tablelike-content">
+                    $$
+                    \begin{align}
+                    m &= V\cdot M
+                    \end{align}
+                    $$
+                </p>
+            </div>
+        </div>
+
+        <div  class="card" id="container-inputs">
+            <div>
+                <label class="tablelike-content" id="label-input-z">Distanz der Kugel zur Spule $z$: </label>
+                <input class="tablelike-content numeric-input" id="input-z"></input>
+            </div>
+            <!-- Windungszahl -->
+            <div>
+                <label class="tablelike-content" id="label-input-N">Windungszahl $N$ der Spule: </label>
+                <input class="tablelike-content numeric-input" id="input-N"></input>
+            </div>
+            <!-- Stromstärke -->
+            <div>
+                <label class="tablelike-content" id="label-input-I">Stromstärke $I$: </label>
+                <input class="tablelike-content numeric-input" id="input-I"></input>
+            </div>
+            <!-- Radius -->
+            <div>
+                <label class="tablelike-content" id="label-input-R">Radius $R$ der Spule: </label>
+                <input class="tablelike-content numeric-input" id="input-R"></input>
+            </div>
+            <!-- radius Kugel -->
+            <div>
+                <label class="tablelike-content" id="label-input-r">Radius $r$ der Kugel: </label>
+                <input class="tablelike-content numeric-input" id="input-r"></input>
+            </div>
+            <!-- Permeabilität -->
+            <div>
+                <label class="tablelike-content" id="label-input-mur">Magnetische Permeabilität $\mu_r$ der Kugel: </label>
+                <input class="tablelike-content numeric-input" id="input-mur"></input>
+            </div>
+        </div>
+        
+
+        <div class="card" id="container-output">
+            <!-- Ergebnis F -->
+            <div>
+                <label class="tablelike-content" id="label-output-F">Kraft $F$: </label>
+                <p class="tablelike-content" id="output-F"></p>
+            </div>
+        </div>
+
+        
+        
+    </body>
+</html>
