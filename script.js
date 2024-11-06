@@ -52,7 +52,7 @@ function calcF(z, N, I, R, r,chi) {
 window.addEventListener("DOMContentLoaded", function() {
     
 });
-
+/*
 const numericInputs = document.getElementsByClassName("numeric-input");
 numericInputs.forEach(input => function() {
     input.addEventListener('input', function() {
@@ -65,7 +65,7 @@ numericInputs.forEach(input => function() {
         }
     });
 });
-
+*/
 
 
 input_N.addEventListener("input", function(){
